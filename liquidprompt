@@ -111,7 +111,7 @@ case "$LP_OS" in
             echo "$load"
         }
         ;;
-    FreeBSD)
+    FreeBSD|Darwin)
         _lp_cpu_load () {
             local bol load eol
             # If you have problems with syntax coloring due to the following
@@ -120,14 +120,6 @@ case "$LP_OS" in
             read bol load eol <<<$( LANG=C sysctl -n vm.loadavg )
             echo "$load"
         }
-        ;;
-    Darwin)
-        _lp_cpu_load () {
-            local bol load eol
-            read bol load eol <<<$( LANG=C sysctl -n vm.loadavg )
-            echo "$load"
-        }
-        LP_DWIN_KERNEL_REL_VER=$(uname -r | cut -d . -f 1)
         ;;
     SunOS)
         _lp_cpu_load () {
