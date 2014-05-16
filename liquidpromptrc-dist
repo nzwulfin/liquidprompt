@@ -107,9 +107,14 @@ LP_ENABLE_RUNTIME=0
 # Recommended value is 2
 LP_RUNTIME_THRESHOLD=2
 
-# Display the virtualenv that is currently activated, if any
+# Display the Python virtualenv that is currently activated, if any
 # Recommended value is 1
 LP_ENABLE_VIRTUALENV=1
+
+# Display the node.js virutalenv that is currently activated, if any
+# Placed after the Python virualenv in PS1 as they can be used together
+# Recommended value is 1
+LP_ENABLE_NODE_VIRTUALENV=1
 
 # Show average system temperature
 LP_ENABLE_TEMP=1

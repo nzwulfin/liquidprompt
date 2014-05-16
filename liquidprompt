@@ -261,6 +261,7 @@ _lp_source_config()
         LP_ENABLE_RUNTIME=${LP_ENABLE_RUNTIME:-0}
     fi
     LP_ENABLE_VIRTUALENV=${LP_ENABLE_VIRTUALENV:-1}
+    LP_ENABLE_NODE_VIRTUALENV=${LP_ENABLE_NODE_VIRTUALENV:-1}
     LP_ENABLE_VCS_ROOT=${LP_ENABLE_VCS_ROOT:-0}
     LP_ENABLE_TITLE=${LP_ENABLE_TITLE:-0}
     LP_ENABLE_SCREEN_TITLE=${LP_ENABLE_SCREEN_TITLE:-0}
@@ -1547,6 +1548,14 @@ _lp_set_prompt()
         LP_VENV=
     fi
 
+    # Display the current Node.js virtual environnement, if available
+    if [[ "$LP_ENABLE_NODE_VIRTUALENV,$NODE_VIRTUAL_ENV" = 1,?* ]] ; then
+        LP_NVENV=" [${LP_COLOR_VIRTUALENV}${NODE_VIRTUAL_ENV##*/}${NO_COL}]"
+    else
+        LP_NVENV=
+    fi
+
+
     LP_RUNTIME=$(_lp_sl "$(_lp_runtime)")
 
     # if change of working directory
@@ -1646,7 +1655,7 @@ _lp_set_prompt()
         # add user, host and permissions colon
         PS1="${PS1}${LP_BRACKET_OPEN}${LP_USER}${LP_HOST}${LP_PERM}"
 
-        PS1="${PS1}${LP_PWD}${LP_BRACKET_CLOSE}${LP_VENV}${LP_PROXY}"
+        PS1="${PS1}${LP_PWD}${LP_BRACKET_CLOSE}${LP_VENV}${LP_NVENV}${LP_PROXY}"
 
         # Add VCS infos
         # If root, the info has not been collected unless LP_ENABLE_VCS_ROOT
